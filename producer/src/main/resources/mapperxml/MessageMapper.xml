@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="indi.shui4.producer.mapper.MessageMapper">
+    <resultMap id="BaseResultMap" type="indi.shui4.producer.model.po.Message">
+        <!--@mbg.generated-->
+        <!--@Table t_message-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="exchange" jdbcType="VARCHAR" property="exchange"/>
+        <result column="routing_key" jdbcType="VARCHAR" property="routingKey"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="business_key" jdbcType="VARBINARY" property="businessKey"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="msg" property="msgContent"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id,
+        exchange,
+        routing_key,
+        `status`,
+        business_key,
+        create_time,
+        update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_message
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        DELETE
+        FROM t_message
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="indi.shui4.producer.model.po.Message"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        INSERT INTO t_message (exchange, routing_key, `status`,
+                               business_key, create_time, update_time, operate)
+        VALUES (#{exchange,jdbcType=VARCHAR}, #{routingKey,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT},
+                #{businessKey,jdbcType=VARBINARY}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+                #{operate,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="indi.shui4.producer.model.po.Message"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        INSERT INTO t_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="exchange != null">
+                exchange,
+            </if>
+            <if test="routingKey != null">
+                routing_key,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="businessKey != null">
+                business_key,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="exchange != null">
+                #{exchange,jdbcType=VARCHAR},
+            </if>
+            <if test="routingKey != null">
+                #{routingKey,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="businessKey != null">
+                #{businessKey,jdbcType=VARBINARY},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="indi.shui4.producer.model.po.Message">
+        <!--@mbg.generated-->
+        UPDATE t_message
+        <set>
+            <if test="exchange != null">
+                exchange = #{exchange,jdbcType=VARCHAR},
+            </if>
+            <if test="routingKey != null">
+                routing_key = #{routingKey,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="businessKey != null">
+                business_key = #{businessKey,jdbcType=VARBINARY},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="indi.shui4.producer.model.po.Message">
+        <!--@mbg.generated-->
+        UPDATE t_message
+        SET exchange     = #{exchange,jdbcType=VARCHAR},
+            routing_key  = #{routingKey,jdbcType=VARCHAR},
+            `status`     = #{status,jdbcType=TINYINT},
+            business_key = #{businessKey,jdbcType=VARBINARY},
+            create_time  = #{createTime,jdbcType=TIMESTAMP},
+            update_time  = #{updateTime,jdbcType=TIMESTAMP}
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="findList" resultMap="BaseResultMap">
+        SELECT m.*, c.msg
+        FROM t_message m
+                 LEFT JOIN t_message_content c ON m.id = c.msg_id
+        <where>
+            status IN
+            <foreach item="item" index="index" collection="ts" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            AND create_time <![CDATA[<=]]> #{time}
+        </where>
+    </select>
+
+    <select id="selectSuccessfulMaxCreateTime" resultType="java.time.LocalDateTime">
+        SELECT MAX(create_time)
+        FROM t_message
+        WHERE business_key = #{businessKey}
+          AND exchange = #{exchange}
+          AND routing_key = #{routingKey}
+          AND status = 1
+    </select>
+</mapper>

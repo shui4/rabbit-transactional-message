@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="indi.shui4.producer.mapper.MessageContentMapper">
+  <resultMap id="BaseResultMap" type="indi.shui4.producer.model.po.MessageContent">
+    <!--@mbg.generated-->
+    <!--@Table t_message_content-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="msg_id" jdbcType="BIGINT" property="msgId" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, msg_id, msg
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_message_content
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from t_message_content
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="indi.shui4.producer.model.po.MessageContent" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_message_content (msg_id, msg)
+    values (#{msgId,jdbcType=BIGINT}, #{msg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="indi.shui4.producer.model.po.MessageContent" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_message_content
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="msgId != null">
+        msg_id,
+      </if>
+      <if test="msg != null">
+        msg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="msgId != null">
+        #{msgId,jdbcType=BIGINT},
+      </if>
+      <if test="msg != null">
+        #{msg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="indi.shui4.producer.model.po.MessageContent">
+    <!--@mbg.generated-->
+    update t_message_content
+    <set>
+      <if test="msgId != null">
+        msg_id = #{msgId,jdbcType=BIGINT},
+      </if>
+      <if test="msg != null">
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="indi.shui4.producer.model.po.MessageContent">
+    <!--@mbg.generated-->
+    update t_message_content
+    set msg_id = #{msgId,jdbcType=BIGINT},
+      msg = #{msg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

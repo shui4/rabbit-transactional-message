@@ -1,0 +1,22 @@
+version: "3"
+services:
+  db:
+    image: mysql:8.0.29
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: local
+      MYSQL_ROOT_HOST: "%"
+    container_name: db
+    ports:
+      - "3306:3306"
+  mq:
+    image: rabbitmq:3.9.21-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    container_name: mq
+  redis:
+    image: redis:5.0.0
+    ports:
+      - "6379:6379"
+    container_name: redis
