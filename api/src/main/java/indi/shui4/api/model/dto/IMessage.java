@@ -5,7 +5,5 @@ package indi.shui4.api.model.dto;
  */
 public interface IMessage {
 
-
-    String getBusinessKey();
-
+  String getBusinessKey();
 }

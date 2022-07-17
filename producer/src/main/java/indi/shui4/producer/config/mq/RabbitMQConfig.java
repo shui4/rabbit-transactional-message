@@ -14,13 +14,13 @@ import org.springframework.context.annotation.Configuration;
 @AutoConfigureBefore(RabbitAutoConfiguration.class)
 public class RabbitMQConfig {
 
-    @Bean
-    public TransactionalRabbitTemplate transactionalRabbitTemplate() {
-        return new TransactionalRabbitTemplate();
-    }
+  @Bean
+  public TransactionalRabbitTemplate transactionalRabbitTemplate() {
+    return new TransactionalRabbitTemplate();
+  }
 
-    @Bean
-    public MessageConverter messageConverter() {
-        return new Jackson2JsonMessageConverter();
-    }
+  @Bean
+  public MessageConverter messageConverter() {
+    return new Jackson2JsonMessageConverter();
+  }
 }

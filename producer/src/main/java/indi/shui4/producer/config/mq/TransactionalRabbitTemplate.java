@@ -22,6 +22,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
+ * 保证事物提交成功，消息一定会发送出去。 <br>
+ *
+ * <p>注意：Consumer必须通过Str接收（无法使用Spring Boot封装的Convert，以对象作为参数）
+ *
  * @author shui4
  */
 @Slf4j
@@ -96,8 +100,8 @@ public class TransactionalRabbitTemplate {
   }
 
   public void retry() throws AmqpException {
-    List<Message> unsuccessfulForList = messageService.findUnsuccessfulForList();
-    for (Message message : unsuccessfulForList) {
+    List<Message> unsuccessfulList = messageService.findUnsuccessfulForList();
+    for (Message message : unsuccessfulList) {
       // UPDATE  A（error）-B（success）-A（retry）
       if (UPDATE_OPT.equals(message.getOperate())) {
         RLock lock = redissonClient.getLock(message.getBusinessKey());

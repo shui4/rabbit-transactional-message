@@ -10,19 +10,19 @@ import java.util.List;
  * @author shui4
  */
 public interface MessageMapper {
-    int deleteByPrimaryKey(Long id);
+  int deleteByPrimaryKey(Long id);
 
-    int insert(Message record);
+  int insert(Message record);
 
-    int insertSelective(Message record);
+  int insertSelective(Message record);
 
-    Message selectByPrimaryKey(Long id);
+  Message selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Message record);
+  int updateByPrimaryKeySelective(Message record);
 
-    int updateByPrimaryKey(Message record);
+  int updateByPrimaryKey(Message record);
 
-    List<Message> findList(@Param("ts") List<Integer> ts, @Param("time") LocalDateTime time);
+  List<Message> findList(@Param("ts") List<Integer> ts, @Param("time") LocalDateTime time);
 
-    LocalDateTime selectSuccessfulMaxCreateTime(Message businessKey);
+  LocalDateTime selectSuccessfulMaxCreateTime(Message businessKey);
 }

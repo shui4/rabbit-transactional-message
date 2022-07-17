@@ -13,11 +13,11 @@ import java.util.Optional;
 @Accessors(chain = true)
 public class OrderDTO implements Serializable, IMessage {
 
-    private Long id;
-    private String content;
+  private Long id;
+  private String content;
 
-    @Override
-    public String getBusinessKey() {
-        return Optional.ofNullable(id).map(Object::toString).orElse(null);
-    }
+  @Override
+  public String getBusinessKey() {
+    return Optional.ofNullable(id).map(Object::toString).orElse(null);
+  }
 }

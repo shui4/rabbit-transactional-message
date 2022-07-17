@@ -6,21 +6,15 @@ import lombok.experimental.Accessors;
 /**
  * @author shui4
  */
-/**
-    * 消息内容
-    */
+/** 消息内容 */
 @Data
 @Accessors(chain = true)
 public class MessageContent {
-    private Long id;
+  private Long id;
 
-    /**
-    * t_message.id
-    */
-    private Long msgId;
+  /** t_message.id */
+  private Long msgId;
 
-    /**
-    * 消息
-    */
-    private String msg;
+  /** 消息 */
+  private String msg;
 }

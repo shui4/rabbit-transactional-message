@@ -40,10 +40,10 @@
             useGeneratedKeys="true">
         <!--@mbg.generated-->
         INSERT INTO t_message (exchange, routing_key, `status`,
-                               business_key, create_time, update_time, operate)
+        business_key, create_time, update_time, operate)
         VALUES (#{exchange,jdbcType=VARCHAR}, #{routingKey,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT},
-                #{businessKey,jdbcType=VARBINARY}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
-                #{operate,jdbcType=INTEGER})
+        #{businessKey,jdbcType=VARBINARY}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+        #{operate,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="indi.shui4.producer.model.po.Message"
             useGeneratedKeys="true">
@@ -118,19 +118,19 @@
     <update id="updateByPrimaryKey" parameterType="indi.shui4.producer.model.po.Message">
         <!--@mbg.generated-->
         UPDATE t_message
-        SET exchange     = #{exchange,jdbcType=VARCHAR},
-            routing_key  = #{routingKey,jdbcType=VARCHAR},
-            `status`     = #{status,jdbcType=TINYINT},
-            business_key = #{businessKey,jdbcType=VARBINARY},
-            create_time  = #{createTime,jdbcType=TIMESTAMP},
-            update_time  = #{updateTime,jdbcType=TIMESTAMP}
+        SET exchange = #{exchange,jdbcType=VARCHAR},
+        routing_key = #{routingKey,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=TINYINT},
+        business_key = #{businessKey,jdbcType=VARBINARY},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
         WHERE id = #{id,jdbcType=BIGINT}
     </update>
 
     <select id="findList" resultMap="BaseResultMap">
         SELECT m.*, c.msg
         FROM t_message m
-                 LEFT JOIN t_message_content c ON m.id = c.msg_id
+        LEFT JOIN t_message_content c ON m.id = c.msg_id
         <where>
             status IN
             <foreach item="item" index="index" collection="ts" open="(" separator="," close=")">
@@ -144,8 +144,8 @@
         SELECT MAX(create_time)
         FROM t_message
         WHERE business_key = #{businessKey}
-          AND exchange = #{exchange}
-          AND routing_key = #{routingKey}
-          AND status = 1
+        AND exchange = #{exchange}
+        AND routing_key = #{routingKey}
+        AND status = 1
     </select>
 </mapper>

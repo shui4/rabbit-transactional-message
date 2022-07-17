@@ -1,61 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="indi.shui4.producer.mapper.OrderMapper">
-  <resultMap id="BaseResultMap" type="indi.shui4.producer.model.po.Order">
-    <!--@mbg.generated-->
-    <!--@Table t_order-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, content
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from t_order
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
-    delete from t_order
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="indi.shui4.producer.model.po.Order" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into t_order (content)
-    values (#{content,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="indi.shui4.producer.model.po.Order" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into t_order
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="content != null">
-        content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="indi.shui4.producer.model.po.Order">
-    <!--@mbg.generated-->
-    update t_order
-    <set>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="indi.shui4.producer.model.po.Order">
-    <!--@mbg.generated-->
-    update t_order
-    set content = #{content,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <resultMap id="BaseResultMap" type="indi.shui4.producer.model.po.Order">
+        <!--@mbg.generated-->
+        <!--@Table t_order-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, content
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_order
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        DELETE FROM t_order
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="indi.shui4.producer.model.po.Order"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        INSERT INTO t_order (content)
+        VALUES (#{content,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="indi.shui4.producer.model.po.Order"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        INSERT INTO t_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="indi.shui4.producer.model.po.Order">
+        <!--@mbg.generated-->
+        UPDATE t_order
+        <set>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="indi.shui4.producer.model.po.Order">
+        <!--@mbg.generated-->
+        UPDATE t_order
+        SET content = #{content,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

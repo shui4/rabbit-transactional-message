@@ -1,6 +1,5 @@
 package indi.shui4.consumer.mq;
 
-import indi.shui4.api.model.dto.OrderDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.Exchange;
