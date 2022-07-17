@@ -105,8 +105,9 @@ public class TransactionalRabbitTemplate {
       // UPDATE  A（error）-B（success）-A（retry）
       if (UPDATE_OPT.equals(message.getOperate())) {
         RLock lock = redissonClient.getLock(message.getBusinessKey());
+        boolean tryLock = lock.tryLock();
         try {
-          if (!lock.tryLock()) {
+          if (!tryLock) {
             success(message.getId());
             return;
           }
@@ -117,7 +118,9 @@ public class TransactionalRabbitTemplate {
           }
           send(message);
         } finally {
-          lock.unlock();
+          if (tryLock) {
+            lock.unlock();
+          }
         }
         return;
       }
